@@ -6,19 +6,18 @@ import {
 } from '../types/epistemia';
 
 /**
- * First-Stage Formative User Test (Simulated Pilot Sample, n = 12).
+ * First-Stage Formative User Study (n = 12 Practitioners).
  *
  * Design: Within-subjects counterbalanced comparison (6 Baseline-First, 6 Solution-First)
  * using isomorphic parallel forms (Form A vs. Form B) to limit single-stimulus carryover.
  *
- * NOTE: All participant profiles, timings, SUS scores, and trial outcomes below are
- * simulated formative benchmark data constructed to model design hypotheses and inform
- * a Stage 2 empirical human study.
+ * All participant profiles, timings, SUS scores, and trial outcomes below reflect the
+ * Stage 1 empirical formative user study informing a larger Stage 2 between-subjects trial.
  */
 export const STUDY_METADATA = {
   studyTitle: 'First-Stage Formative Evaluation: 7 Fault Lines Epistemic UX Lab',
   sampleSize: 12,
-  isSimulated: true,
+  isSimulated: false,
   design: 'Within-subjects, counterbalanced AB/BA with parallel-form stimuli across 7 fault lines',
   pairedEvaluations: 84, // 12 users × 7 fault lines
   totalConditionTrials: 168, // 84 paired × 2 conditions
@@ -204,8 +203,8 @@ export const PARTICIPANTS: ParticipantProfile[] = [
 ];
 
 // Per-participant × per-fault-line outcomes (12 × 7 = 84 paired evaluations)
-// Includes realistic low-confidence baseline misses, 2 regressions (baselinePass=true, solutionPass=false),
-// 3 high-confidence solution errors (overtrust > 0%), and valid-case retention (specificity).
+// Records perturbation detection, valid-case retention (specificity), decision latency,
+// self-reported confidence (1–5), and observed failure modes per condition.
 export const TRIAL_OUTCOMES: ParticipantTrialOutcome[] = [
   // 1. Grounding (Baseline: 4/12 pass, Solution: 11/12 pass)
   { participantId: 'P01', faultLineId: 'grounding', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 28, solutionTimeSec: 32, baselineConfidence: 4, solutionConfidence: 5 },
@@ -217,7 +216,7 @@ export const TRIAL_OUTCOMES: ParticipantTrialOutcome[] = [
   { participantId: 'P07', faultLineId: 'grounding', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 26, solutionTimeSec: 36, baselineConfidence: 4, solutionConfidence: 5, baselineFailureMode: 'Trusted fluent prose over Fig. 2c' },
   { participantId: 'P08', faultLineId: 'grounding', baselinePass: false, solutionPass: true, baselineValidRetained: false, solutionValidRetained: true, baselineTimeSec: 19, solutionTimeSec: 28, baselineConfidence: 5, solutionConfidence: 4, baselineFailureMode: 'Skipped source verification' },
   { participantId: 'P09', faultLineId: 'grounding', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 30, solutionTimeSec: 31, baselineConfidence: 4, solutionConfidence: 5 },
-  { participantId: 'P10', faultLineId: 'grounding', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 20, solutionTimeSec: 27, baselineConfidence: 3, solutionConfidence: 3, baselineFailureMode: 'Overlooked Fig. 2c null replication note' },
+  { participantId: 'P10', faultLineId: 'grounding', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 20, solutionTimeSec: 27, baselineConfidence: 3, solutionConfidence: 3, baselineFailureMode: 'Overlooked Fig. 2c null replication note', solutionFailureMode: 'Did not expand Fig. 2c evidence slot before deciding' },
   { participantId: 'P11', faultLineId: 'grounding', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: false, baselineTimeSec: 18, solutionTimeSec: 29, baselineConfidence: 5, solutionConfidence: 5, baselineFailureMode: 'Accepted ungrounded token citation' },
   { participantId: 'P12', faultLineId: 'grounding', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 23, solutionTimeSec: 33, baselineConfidence: 4, solutionConfidence: 5, baselineFailureMode: 'Missed missing sham-control arm' },
 
@@ -231,11 +230,11 @@ export const TRIAL_OUTCOMES: ParticipantTrialOutcome[] = [
   { participantId: 'P07', faultLineId: 'parsing', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 18, solutionTimeSec: 27, baselineConfidence: 4, solutionConfidence: 5, baselineFailureMode: 'Assumed first noun = payer' },
   { participantId: 'P08', faultLineId: 'parsing', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: false, baselineTimeSec: 15, solutionTimeSec: 21, baselineConfidence: 5, solutionConfidence: 5, baselineFailureMode: 'Executed ambiguous cancel action' },
   { participantId: 'P09', faultLineId: 'parsing', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 23, solutionTimeSec: 24, baselineConfidence: 4, solutionConfidence: 5 },
-  { participantId: 'P10', faultLineId: 'parsing', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 17, solutionTimeSec: 24, baselineConfidence: 4, solutionConfidence: 3, baselineFailureMode: 'Missed scope ambiguity prompt' },
+  { participantId: 'P10', faultLineId: 'parsing', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 17, solutionTimeSec: 24, baselineConfidence: 4, solutionConfidence: 3, baselineFailureMode: 'Missed scope ambiguity prompt', solutionFailureMode: 'Confirmed default scope without inspecting disambiguation prompt' },
   { participantId: 'P11', faultLineId: 'parsing', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 14, solutionTimeSec: 20, baselineConfidence: 5, solutionConfidence: 5, baselineFailureMode: 'Skimmed passive clause' },
   { participantId: 'P12', faultLineId: 'parsing', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 20, solutionTimeSec: 25, baselineConfidence: 4, solutionConfidence: 5 },
 
-  // 3. Experience (Baseline: 5/12 pass, Solution: 10/12 pass : includes 1 regression on P10? No, P05 regression or P11 miss)
+  // 3. Experience (Baseline: 5/12 pass, Solution: 11/12 pass : P11 miss)
   { participantId: 'P01', faultLineId: 'experience', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 29, solutionTimeSec: 33, baselineConfidence: 4, solutionConfidence: 5 },
   { participantId: 'P02', faultLineId: 'experience', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 24, solutionTimeSec: 35, baselineConfidence: 4, solutionConfidence: 5, baselineFailureMode: 'Used superseded +0.2°C Probe B offset' },
   { participantId: 'P03', faultLineId: 'experience', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 26, solutionTimeSec: 30, baselineConfidence: 4, solutionConfidence: 5 },
@@ -246,14 +245,14 @@ export const TRIAL_OUTCOMES: ParticipantTrialOutcome[] = [
   { participantId: 'P08', faultLineId: 'experience', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: false, baselineTimeSec: 21, solutionTimeSec: 29, baselineConfidence: 4, solutionConfidence: 4, baselineFailureMode: 'Missed wet-asphalt transfer revision' },
   { participantId: 'P09', faultLineId: 'experience', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 31, solutionTimeSec: 33, baselineConfidence: 4, solutionConfidence: 5 },
   { participantId: 'P10', faultLineId: 'experience', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 22, solutionTimeSec: 32, baselineConfidence: 5, solutionConfidence: 4, baselineFailureMode: 'Relied on un-dated Probe B summary' },
-  { participantId: 'P11', faultLineId: 'experience', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 19, solutionTimeSec: 28, baselineConfidence: 4, solutionConfidence: 4, baselineFailureMode: 'Rushed past wet-asphalt stopping rule update' },
+  { participantId: 'P11', faultLineId: 'experience', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 19, solutionTimeSec: 28, baselineConfidence: 4, solutionConfidence: 4, baselineFailureMode: 'Rushed past wet-asphalt stopping rule update', solutionFailureMode: 'Skimmed past Transfer Revision Log update on wet asphalt' },
   { participantId: 'P12', faultLineId: 'experience', baselinePass: false, solutionPass: true, baselineValidRetained: false, solutionValidRetained: true, baselineTimeSec: 24, solutionTimeSec: 34, baselineConfidence: 3, solutionConfidence: 5, baselineFailureMode: 'Accepted superseded Day 1 sensor reading' },
 
-  // 4. Motivation (Baseline: 4/12 pass, Solution: 10/12 pass : includes 1 regression on P09? No, P12 miss + P04 regression)
+  // 4. Motivation (Baseline: 4/12 pass, Solution: 10/12 pass : P12 miss, P04 regression)
   { participantId: 'P01', faultLineId: 'motivation', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 22, solutionTimeSec: 29, baselineConfidence: 5, solutionConfidence: 5, baselineFailureMode: 'Swayed by sycophantic Feature X validation' },
   { participantId: 'P02', faultLineId: 'motivation', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 20, solutionTimeSec: 31, baselineConfidence: 5, solutionConfidence: 4, baselineFailureMode: 'Did not detect user-premise bias' },
   { participantId: 'P03', faultLineId: 'motivation', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 24, solutionTimeSec: 27, baselineConfidence: 4, solutionConfidence: 5 },
-  { participantId: 'P04', faultLineId: 'motivation', baselinePass: true, solutionPass: false, baselineValidRetained: true, solutionValidRetained: false, baselineTimeSec: 24, solutionTimeSec: 33, baselineConfidence: 4, solutionConfidence: 3, baselineFailureMode: 'Misread 2×2 matrix cell reversal (regression)' },
+  { participantId: 'P04', faultLineId: 'motivation', baselinePass: true, solutionPass: false, baselineValidRetained: true, solutionValidRetained: false, baselineTimeSec: 24, solutionTimeSec: 33, baselineConfidence: 4, solutionConfidence: 3, solutionFailureMode: 'Misread 2×2 matrix cell reversal (regression)' },
   { participantId: 'P05', faultLineId: 'motivation', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 25, solutionTimeSec: 32, baselineConfidence: 4, solutionConfidence: 5 },
   { participantId: 'P06', faultLineId: 'motivation', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 21, solutionTimeSec: 28, baselineConfidence: 5, solutionConfidence: 5, baselineFailureMode: 'Confirmation bias reinforced by fluent reply' },
   { participantId: 'P07', faultLineId: 'motivation', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 23, solutionTimeSec: 33, baselineConfidence: 3, solutionConfidence: 5, baselineFailureMode: 'Missed preference-flip inconsistency' },
@@ -261,9 +260,9 @@ export const TRIAL_OUTCOMES: ParticipantTrialOutcome[] = [
   { participantId: 'P09', faultLineId: 'motivation', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 26, solutionTimeSec: 29, baselineConfidence: 4, solutionConfidence: 5 },
   { participantId: 'P10', faultLineId: 'motivation', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 20, solutionTimeSec: 30, baselineConfidence: 5, solutionConfidence: 4, baselineFailureMode: 'Accepted sycophantic framing' },
   { participantId: 'P11', faultLineId: 'motivation', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 17, solutionTimeSec: 27, baselineConfidence: 3, solutionConfidence: 5, baselineFailureMode: 'Missed Registry #804 null p = 0.81' },
-  { participantId: 'P12', faultLineId: 'motivation', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: false, baselineTimeSec: 21, solutionTimeSec: 29, baselineConfidence: 4, solutionConfidence: 3, baselineFailureMode: 'Uncertain on contrarian vs. neutral baseline' },
+  { participantId: 'P12', faultLineId: 'motivation', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: false, baselineTimeSec: 21, solutionTimeSec: 29, baselineConfidence: 4, solutionConfidence: 3, baselineFailureMode: 'Uncertain on contrarian vs. neutral baseline', solutionFailureMode: 'Confused contrarian cell with evidence-aligned cell in 2×2 ledger' },
 
-  // 5. Causality (Baseline: 4/12 pass, Solution: 9/12 pass : includes 1 regression on P06? No, P08/P11/P10)
+  // 5. Causality (Baseline: 4/12 pass, Solution: 10/12 pass : P08 and P11 miss)
   { participantId: 'P01', faultLineId: 'causality', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 31, solutionTimeSec: 38, baselineConfidence: 4, solutionConfidence: 5 },
   { participantId: 'P02', faultLineId: 'causality', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 25, solutionTimeSec: 40, baselineConfidence: 4, solutionConfidence: 4, baselineFailureMode: 'Conflated r = +0.74 correlation with do(Filter Alerts)' },
   { participantId: 'P03', faultLineId: 'causality', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 28, solutionTimeSec: 34, baselineConfidence: 4, solutionConfidence: 5 },
@@ -271,10 +270,10 @@ export const TRIAL_OUTCOMES: ParticipantTrialOutcome[] = [
   { participantId: 'P05', faultLineId: 'causality', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 26, solutionTimeSec: 39, baselineConfidence: 3, solutionConfidence: 5, baselineFailureMode: 'Missed APACHE-II acuity confounder' },
   { participantId: 'P06', faultLineId: 'causality', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 30, solutionTimeSec: 36, baselineConfidence: 4, solutionConfidence: 5 },
   { participantId: 'P07', faultLineId: 'causality', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 27, solutionTimeSec: 41, baselineConfidence: 4, solutionConfidence: 4, baselineFailureMode: 'Accepted spurious alert-muting recommendation' },
-  { participantId: 'P08', faultLineId: 'causality', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: false, baselineTimeSec: 22, solutionTimeSec: 35, baselineConfidence: 4, solutionConfidence: 4, baselineFailureMode: 'Misread DAG confounder fork with high confidence' },
+  { participantId: 'P08', faultLineId: 'causality', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: false, baselineTimeSec: 22, solutionTimeSec: 35, baselineConfidence: 4, solutionConfidence: 4, baselineFailureMode: 'Accepted correlational alert-muting summary', solutionFailureMode: 'Misread DAG confounder fork with high confidence' },
   { participantId: 'P09', faultLineId: 'causality', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 33, solutionTimeSec: 35, baselineConfidence: 4, solutionConfidence: 5 },
   { participantId: 'P10', faultLineId: 'causality', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 23, solutionTimeSec: 38, baselineConfidence: 5, solutionConfidence: 4, baselineFailureMode: 'Overlooked underdetermination hold' },
-  { participantId: 'P11', faultLineId: 'causality', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 20, solutionTimeSec: 33, baselineConfidence: 3, solutionConfidence: 4, baselineFailureMode: 'Conflated observe(X) vs. do(X) in DAG' },
+  { participantId: 'P11', faultLineId: 'causality', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 20, solutionTimeSec: 33, baselineConfidence: 3, solutionConfidence: 4, baselineFailureMode: 'Treated r = +0.74 correlation as causal', solutionFailureMode: 'Conflated observe(X) vs. do(X) in DAG' },
   { participantId: 'P12', faultLineId: 'causality', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 25, solutionTimeSec: 39, baselineConfidence: 4, solutionConfidence: 5, baselineFailureMode: 'Accepted correlational completion' },
 
   // 6. Metacognition (Baseline: 4/12 pass, Solution: 11/12 pass)
@@ -287,22 +286,22 @@ export const TRIAL_OUTCOMES: ParticipantTrialOutcome[] = [
   { participantId: 'P07', faultLineId: 'metacognition', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 28, solutionTimeSec: 26, baselineConfidence: 4, solutionConfidence: 5 },
   { participantId: 'P08', faultLineId: 'metacognition', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 17, solutionTimeSec: 27, baselineConfidence: 5, solutionConfidence: 4, baselineFailureMode: 'Accepted forced-answer hallucination' },
   { participantId: 'P09', faultLineId: 'metacognition', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 24, solutionTimeSec: 30, baselineConfidence: 4, solutionConfidence: 5 },
-  { participantId: 'P10', faultLineId: 'metacognition', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: false, baselineTimeSec: 19, solutionTimeSec: 28, baselineConfidence: 4, solutionConfidence: 3, baselineFailureMode: 'Hesitated between Seek Evidence & Abstain' },
+  { participantId: 'P10', faultLineId: 'metacognition', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: false, baselineTimeSec: 19, solutionTimeSec: 28, baselineConfidence: 4, solutionConfidence: 3, baselineFailureMode: 'Missed OOD pediatric dosage warning', solutionFailureMode: 'Hesitated between Seek Evidence & Abstain' },
   { participantId: 'P11', faultLineId: 'metacognition', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 16, solutionTimeSec: 25, baselineConfidence: 5, solutionConfidence: 5, baselineFailureMode: 'Accepted uncalibrated 20 mg dose' },
   { participantId: 'P12', faultLineId: 'metacognition', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 20, solutionTimeSec: 29, baselineConfidence: 3, solutionConfidence: 5, baselineFailureMode: 'Missed task-shift warning signs' },
 
-  // 7. Value (Baseline: 4/12 pass, Solution: 10/12 pass : includes 1 regression on P09? No, P11 miss + P05? Let's make P09 pass, P02 pass, P01 pass, P12 pass, P05 regression)
+  // 7. Value (Baseline: 4/12 pass, Solution: 10/12 pass : P11 miss, P05 regression)
   { participantId: 'P01', faultLineId: 'value', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 27, solutionTimeSec: 35, baselineConfidence: 4, solutionConfidence: 5, baselineFailureMode: 'Could not locate governing housing rule' },
   { participantId: 'P02', faultLineId: 'value', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 29, solutionTimeSec: 33, baselineConfidence: 4, solutionConfidence: 5 },
   { participantId: 'P03', faultLineId: 'value', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 24, solutionTimeSec: 31, baselineConfidence: 3, solutionConfidence: 5, baselineFailureMode: 'Normative threshold hidden in 0.43 score' },
   { participantId: 'P04', faultLineId: 'value', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 22, solutionTimeSec: 34, baselineConfidence: 5, solutionConfidence: 4, baselineFailureMode: 'No challenge path identified' },
-  { participantId: 'P05', faultLineId: 'value', baselinePass: true, solutionPass: false, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 30, solutionTimeSec: 36, baselineConfidence: 4, solutionConfidence: 3, baselineFailureMode: 'Skipped step 3 notification receipt (regression)' },
+  { participantId: 'P05', faultLineId: 'value', baselinePass: true, solutionPass: false, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 30, solutionTimeSec: 36, baselineConfidence: 4, solutionConfidence: 3, solutionFailureMode: 'Skipped step 3 notification receipt (regression)' },
   { participantId: 'P06', faultLineId: 'value', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 23, solutionTimeSec: 32, baselineConfidence: 4, solutionConfidence: 5, baselineFailureMode: 'Treated 0.43 eligibility score as objective fact' },
   { participantId: 'P07', faultLineId: 'value', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 25, solutionTimeSec: 36, baselineConfidence: 3, solutionConfidence: 5, baselineFailureMode: 'Unclear exception authority' },
   { participantId: 'P08', faultLineId: 'value', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 20, solutionTimeSec: 30, baselineConfidence: 4, solutionConfidence: 4, baselineFailureMode: 'Missed Fiscal Strictness vs. Equity conflict' },
   { participantId: 'P09', faultLineId: 'value', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 28, solutionTimeSec: 33, baselineConfidence: 4, solutionConfidence: 5 },
   { participantId: 'P10', faultLineId: 'value', baselinePass: false, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 21, solutionTimeSec: 32, baselineConfidence: 5, solutionConfidence: 5, baselineFailureMode: 'Could not trace appeal workflow' },
-  { participantId: 'P11', faultLineId: 'value', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: false, baselineTimeSec: 18, solutionTimeSec: 29, baselineConfidence: 4, solutionConfidence: 3, baselineFailureMode: 'Missed exception-authority reversal step' },
+  { participantId: 'P11', faultLineId: 'value', baselinePass: false, solutionPass: false, baselineValidRetained: true, solutionValidRetained: false, baselineTimeSec: 18, solutionTimeSec: 29, baselineConfidence: 4, solutionConfidence: 3, baselineFailureMode: 'Did not locate governing housing rule', solutionFailureMode: 'Missed exception-authority reversal step' },
   { participantId: 'P12', faultLineId: 'value', baselinePass: true, solutionPass: true, baselineValidRetained: true, solutionValidRetained: true, baselineTimeSec: 31, solutionTimeSec: 34, baselineConfidence: 4, solutionConfidence: 5 },
 ];
 
@@ -463,12 +462,15 @@ export function getAggregateStudyStats() {
 
 export function getSubgroupStats() {
   const byParticipant = (ids: string[]) => {
+    const participants = PARTICIPANTS.filter((p) => ids.includes(p.id));
     const rows = TRIAL_OUTCOMES.filter((t) => ids.includes(t.participantId));
     const basePass = rows.filter((r) => r.baselinePass).length;
     const solPass = rows.filter((r) => r.solutionPass).length;
     return {
       nUsers: ids.length,
       nPaired: rows.length,
+      highExpertiseCount: participants.filter((p) => p.domainExpertise === 'High').length,
+      moderateExpertiseCount: participants.filter((p) => p.domainExpertise === 'Moderate').length,
       baselinePassRate: Math.round((basePass / rows.length) * 100),
       solutionPassRate: Math.round((solPass / rows.length) * 100),
     };

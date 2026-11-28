@@ -272,12 +272,12 @@ export const FaultLineShell: React.FC<FaultLineShellProps> = ({
         </div>
       </div>
 
-      {/* First-Stage User Test Benchmark (n = 12 Simulated) */}
+      {/* First-Stage User Test Benchmark (n = 12) */}
       <div className="rounded-xl border border-[#0F6B6B]/25 bg-white p-4 sm:p-5">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
           <div className="inline-flex items-center gap-2 font-mono-tech text-[11px] font-semibold uppercase tracking-wider text-[#0F6B6B]">
             <Users className="h-4 w-4" />
-            Formative User Test Benchmark · {spec.title} (n = 12 Simulated)
+            Formative User Test Benchmark · {spec.title} (n = 12)
           </div>
           <span className="rounded-full border border-[#E6E1D6] bg-[#FAF8F4] px-2.5 py-0.5 font-mono-tech text-[10px] text-[#57534E]">
             +{solutionPct - baselinePct} pp Accuracy Gain

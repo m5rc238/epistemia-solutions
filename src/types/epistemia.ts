@@ -58,6 +58,7 @@ export interface ParticipantTrialOutcome {
   baselineConfidence: number; // 1-5
   solutionConfidence: number; // 1-5
   baselineFailureMode?: string;
+  solutionFailureMode?: string;
 }
 
 export interface FaultLineStudySummary {

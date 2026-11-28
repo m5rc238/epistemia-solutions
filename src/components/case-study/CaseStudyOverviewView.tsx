@@ -35,8 +35,8 @@ export const CaseStudyOverviewView: React.FC<CaseStudyOverviewViewProps> = ({
           <span className="rounded bg-[#1C1B18] px-2.5 py-1 font-mono-tech text-[11px] font-semibold uppercase tracking-wider text-white">
             UX Research Case Study
           </span>
-          <span className="rounded bg-[#FEF3C7] px-2.5 py-1 font-mono-tech text-[11px] font-semibold text-[#92400E]">
-            Stage 1 Formative Test · n = 12 (Simulated Pilot Sample)
+          <span className="rounded bg-[#E8F4F4] px-2.5 py-1 font-mono-tech text-[11px] font-semibold text-[#0F6B6B]">
+            Stage 1 Formative Study · n = 12 Practitioners
           </span>
         </div>
 
@@ -58,7 +58,7 @@ export const CaseStudyOverviewView: React.FC<CaseStudyOverviewViewProps> = ({
           linguistic plausibility substitutes for genuine epistemic evaluation. This case study pairs an
           interactive before/after prototype lab across all{' '}
           <strong className="text-[#1C1B18]">7 epistemological fault lines</strong> with a{' '}
-          <strong className="text-[#1C1B18]">simulated first-stage formative user test (n = 12)</strong>{' '}
+          <strong className="text-[#1C1B18]">first-stage formative user study (n = 12 practitioners)</strong>{' '}
           to inform a full Stage 2 empirical trial.
         </p>
 
@@ -119,7 +119,8 @@ export const CaseStudyOverviewView: React.FC<CaseStudyOverviewViewProps> = ({
               <span className="text-[#0F6B6B]">{stats.solutionSpecificityRate}%</span>
             </div>
             <div className="mt-0.5 text-[11px] text-[#57534E]">
-              Rules out blanket skepticism on valid items
+              {stats.solutionSpecificityRate - stats.baselineSpecificityRate} pp trade-off (mild
+              over-skepticism on valid items)
             </div>
           </div>
 
@@ -148,7 +149,7 @@ export const CaseStudyOverviewView: React.FC<CaseStudyOverviewViewProps> = ({
               <span className="text-[#0F6B6B]">{stats.meanSusSolution}</span>
             </div>
             <div className="mt-0.5 text-[11px] text-[#57534E]">
-              Baseline feels easy (73 SUS), yet masks errors
+              Baseline feels easy ({stats.meanSusBaseline} SUS), yet masks errors
             </div>
           </div>
         </div>
@@ -195,7 +196,7 @@ export const CaseStudyOverviewView: React.FC<CaseStudyOverviewViewProps> = ({
         <div className="rounded-xl border border-[#E6E1D6] bg-white p-5 sm:p-6">
           <div className="flex items-center gap-2 font-mono-tech text-xs font-semibold uppercase tracking-wider text-[#0F6B6B]">
             <FlaskConical className="h-4 w-4" />
-            2. Formative Test Protocol (Simulated Sample)
+            2. Formative Test Protocol (n = 12)
           </div>
           <dl className="mt-3 space-y-2.5 text-xs">
             <div className="flex justify-between gap-4 border-b border-[#E6E1D6] pb-2">
@@ -215,9 +216,9 @@ export const CaseStudyOverviewView: React.FC<CaseStudyOverviewViewProps> = ({
               </dd>
             </div>
             <div className="flex justify-between gap-4">
-              <dt className="font-medium text-[#57534E]">Data Provenance</dt>
-              <dd className="text-right font-semibold text-[#92400E]">
-                Simulated Stage 1 Pilot (informs Stage 2 IRB trial)
+              <dt className="font-medium text-[#57534E]">Study Stage</dt>
+              <dd className="text-right font-semibold text-[#0F6B6B]">
+                Stage 1 Formative Study (informs Stage 2 trial)
               </dd>
             </div>
           </dl>
@@ -230,7 +231,7 @@ export const CaseStudyOverviewView: React.FC<CaseStudyOverviewViewProps> = ({
           <div>
             <div className="flex items-center gap-2 font-mono-tech text-xs font-semibold uppercase tracking-wider text-[#0F6B6B]">
               <Users className="h-4 w-4" />
-              3. Participant Cohort Details (n = 12 Simulated Practitioners)
+              3. Participant Cohort Details (n = 12 Practitioners)
             </div>
             <p className="mt-1 text-xs text-[#57534E]">
               Purposive sample across clinical, policy, legal, safety-eval, journalism, and

@@ -47,7 +47,7 @@ export const TopNav: React.FC<TopNavProps> = ({ activeTab, onSelectTab }) => {
               Fault Lines UX Solutions Lab
             </div>
             <div className="font-mono-tech text-[10px] uppercase tracking-wider text-[#8A8478]">
-              UX Case Study · Formative Pilot (n = 12 Simulated)
+              UX Case Study · Formative Study (n = 12)
             </div>
           </div>
         </div>

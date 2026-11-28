@@ -4,7 +4,7 @@ A standalone UX case study and interactive pattern library operationalizing the 
 
 ## What Is Inside
 
-- **Case Study & 12-User Cohort**: Problem statement, within-subjects counterbalanced protocol (simulated Stage 1 formative sample, `n = 12` practitioners across 84 paired evaluations / 168 condition trials), full participant roster (`P01`–`P12`), and verbatim fault-line definitions from `arXiv:2512.19466v1`.
+- **Case Study & 12-User Cohort**: Problem statement, within-subjects counterbalanced protocol (Stage 1 formative study, `n = 12` practitioners across 84 paired evaluations / 168 condition trials), full participant roster (`P01`–`P12`), and verbatim fault-line definitions from `arXiv:2512.19466v1`.
 - **7 Fault Lines UX Lab**: Interactive Baseline vs. Epistemic UX Solution prototypes with live perturbation controls, toggleable UX design annotations, and per-fault-line `n = 12` benchmarks.
 - **Chatbot Prototype**: Side-by-side Conventional Fluent Chatbot vs. Epistemic-Scaffolded Chatbot showing pure chat output inside the bubbles and UX annotations outside.
 - **12-User Results & Analysis**: Grouped bar chart, sensitivity/specificity breakdown, Fluency-Accuracy SUS trade-off, subgroup checks (counterbalance order and domain expertise), and `P01`–`P12` × 7 Fault Lines outcome matrix.

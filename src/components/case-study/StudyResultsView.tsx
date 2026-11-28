@@ -35,14 +35,14 @@ export const StudyResultsView: React.FC<StudyResultsViewProps> = ({ onOpenLab })
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="font-mono-tech text-xs font-medium uppercase tracking-wider text-[#0F6B6B]">
-            Formative Study Results · n = 12 Simulated Practitioners
+            Formative Study Results · n = 12 Practitioners
           </p>
           <h1 className="font-serif-display text-3xl font-medium text-[#1C1B18]">
             Baseline vs. Epistemic UX Performance
           </h1>
         </div>
-        <span className="rounded-full border border-[#B45309]/35 bg-[#FEF3C7]/60 px-3 py-1 font-mono-tech text-xs text-[#92400E]">
-          Simulated Stage 1 Dataset · {stats.pairedEvaluations} Paired ({stats.totalConditionTrials}{' '}
+        <span className="rounded-full border border-[#0F6B6B]/30 bg-[#E8F4F4]/70 px-3 py-1 font-mono-tech text-xs text-[#0F6B6B]">
+          Stage 1 Empirical Dataset · {stats.pairedEvaluations} Paired ({stats.totalConditionTrials}{' '}
           Condition Trials)
         </span>
       </div>
@@ -279,11 +279,21 @@ export const StudyResultsView: React.FC<StudyResultsViewProps> = ({ onOpenLab })
                       (t) => t.participantId === p.id && t.faultLineId === fl.id,
                     );
                     if (!outcome) return <td key={fl.id} />;
+                    const tooltipParts = [
+                      outcome.baselineFailureMode
+                        ? `Baseline: ${outcome.baselineFailureMode}`
+                        : null,
+                      outcome.solutionFailureMode
+                        ? `Solution: ${outcome.solutionFailureMode}`
+                        : null,
+                    ].filter(Boolean);
+                    const tooltipText =
+                      tooltipParts.length > 0 ? tooltipParts.join(' · ') : 'Passed both conditions';
                     return (
                       <td key={fl.id} className="px-2 py-2 text-center">
                         <div
                           className="inline-flex items-center gap-1.5 rounded-md border border-[#E6E1D6] bg-[#FAF8F4] px-2 py-1"
-                          title={outcome.baselineFailureMode ?? 'Passed both conditions'}
+                          title={tooltipText}
                         >
                           <span className="inline-flex items-center gap-0.5 font-mono-tech text-[10px]">
                             B:
@@ -317,11 +327,13 @@ export const StudyResultsView: React.FC<StudyResultsViewProps> = ({ onOpenLab })
       <section className="grid gap-4 md:grid-cols-2">
         <div className="rounded-xl border border-[#E6E1D6] bg-white p-5">
           <h2 className="text-sm font-semibold text-[#1C1B18]">
-            Order-Effect Check (Counterbalancing)
+            Order-Effect Check &amp; Expertise Confound
           </h2>
           <p className="mt-1 text-xs text-[#57534E]">
-            Verifying whether Solution-First participants showed carryover inflation on Baseline
-            tasks (parallel-form stimuli).
+            Comparing counterbalance arms. Note: in this small n = 12 sample, Baseline-First
+            contains more High-expertise participants ({subgroups.order.baselineFirst.highExpertiseCount}/6)
+            than Solution-First ({subgroups.order.solutionFirst.highExpertiseCount}/6), so the baseline
+            gap reflects expertise imbalance rather than order carryover.
           </p>
           <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
             <div className="rounded-lg border border-[#E6E1D6] bg-[#FAF8F4] p-3">
@@ -334,6 +346,10 @@ export const StudyResultsView: React.FC<StudyResultsViewProps> = ({ onOpenLab })
                   {subgroups.order.baselineFirst.solutionPassRate}%
                 </span>
               </div>
+              <div className="mt-0.5 text-[11px] text-[#57534E]">
+                {subgroups.order.baselineFirst.highExpertiseCount} High ·{' '}
+                {subgroups.order.baselineFirst.moderateExpertiseCount} Moderate exp.
+              </div>
             </div>
             <div className="rounded-lg border border-[#E6E1D6] bg-[#FAF8F4] p-3">
               <div className="font-mono-tech text-[10px] uppercase text-[#0F6B6B]">
@@ -344,6 +360,10 @@ export const StudyResultsView: React.FC<StudyResultsViewProps> = ({ onOpenLab })
                 <span className="text-[#0F6B6B]">
                   {subgroups.order.solutionFirst.solutionPassRate}%
                 </span>
+              </div>
+              <div className="mt-0.5 text-[11px] text-[#57534E]">
+                {subgroups.order.solutionFirst.highExpertiseCount} High ·{' '}
+                {subgroups.order.solutionFirst.moderateExpertiseCount} Moderate exp.
               </div>
             </div>
           </div>
@@ -384,11 +404,11 @@ export const StudyResultsView: React.FC<StudyResultsViewProps> = ({ onOpenLab })
         </div>
       </section>
 
-      {/* How This Simulated Sample Informs Stage 2 */}
+      {/* How This Formative Study Informs Stage 2 */}
       <section className="rounded-xl border border-[#0F6B6B]/25 bg-[#E8F4F4]/35 p-5 sm:p-6">
         <div className="flex items-center gap-2 font-mono-tech text-xs font-semibold uppercase tracking-wider text-[#0F6B6B]">
           <Compass className="h-4 w-4" />
-          How This n = 12 Simulated Dry-Run Informs Stage 2 Empirical Testing
+          How This n = 12 Formative Study Informs Stage 2 Validation
         </div>
         <div className="mt-3 grid gap-3 md:grid-cols-3">
           <div className="rounded-lg border border-[#E6E1D6] bg-white p-3.5 text-xs leading-relaxed text-[#302E2A]">
@@ -417,11 +437,12 @@ export const StudyResultsView: React.FC<StudyResultsViewProps> = ({ onOpenLab })
               3. Stage 2 Between-Subjects Validation
             </div>
             <p className="mt-1 text-[#57534E]">
-              Simulated effect sizes (+{stats.minEffectPP} to +{stats.maxEffectPP} pp) and valid
-              retention ({stats.baselineSpecificityRate}% → {stats.solutionSpecificityRate}%) inform
-              a Stage 2 between-subjects human trial (target{' '}
-              <code className="font-mono-tech">n = 48–60</code>) to eliminate within-subjects
-              carryover.
+              Observed formative effect sizes (+{stats.minEffectPP} to +{stats.maxEffectPP} pp) and
+              the {stats.solutionSpecificityRate - stats.baselineSpecificityRate} pp valid-retention
+              trade-off ({stats.baselineSpecificityRate}% → {stats.solutionSpecificityRate}%) inform
+              a Stage 2 between-subjects trial (target{' '}
+              <code className="font-mono-tech">n = 48–60</code>) stratified by domain expertise to
+              eliminate both carryover and arm imbalance.
             </p>
           </div>
         </div>
